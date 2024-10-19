@@ -12,7 +12,7 @@ export function Sidebar() {
 
   return (
     <Drawer>
-      <div className="hidden w-[15rem] z-50 h-screen md:flex flex-col gap-10 items-center fixed top-0 left-0">
+      <div className="hidden z-50 md:flex flex-col gap-10 items-center fixed top-0 left-0 h-full md:w-[16rem] w-[12rem] bg-gray-800">
         <div className="flex flex-col justify-start items-start gap-5 mx-5">
           <div className="flex py-5">
             <Logo className="text-xl" />
@@ -30,11 +30,10 @@ export function Sidebar() {
                     onClick={() => {
                       router.push(subLink.key);
                     }}
-                    className={`flex text-black gap-2 items-center justify-start p-2 cursor-pointer ${
-                      isActive
-                        ? "bg-primary !text-white h-[48px] px-2 w-[210px] rounded-md"
-                        : " h-[48px] px-2 w-[210px] rounded-md"
-                    }`}
+                    className={`flex text-white/90 gap-2 items-center justify-start p-2 cursor-pointer ${isActive
+                      ? "bg-primary !text-white h-[48px] px-2 w-[210px] rounded-md"
+                      : " h-[48px] px-2 w-[210px] rounded-md"
+                      }`}
                   >
                     <subLink.icon
                       className={`w-6 h-6 ${isActive ? "text-white" : " hover:text-white"}`}

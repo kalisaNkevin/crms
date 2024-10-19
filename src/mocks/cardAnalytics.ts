@@ -25,6 +25,14 @@ export const analyticsData = [
     tolorence: "+2",
     footerText: "in the last 2 months",
   },
+  {
+    id: 3,
+    imageSrc: devContainer,
+    description: "Syndicate",
+    points: "3",
+    tolorence: "+2",
+    footerText: "in the last 2 months",
+  },
 ];
 
 export const analyticsDataSyndicate = [

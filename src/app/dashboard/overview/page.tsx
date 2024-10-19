@@ -10,13 +10,14 @@ import Image from "next/image";
 import { analyticsData } from "@/mocks/cardAnalytics";
 import ChartTransactionList from "@/components/Charts/Graph";
 import { PageContainer } from "@/components/Container";
+import { BarChartComponent } from "@/components/Charts/BarChart";
 
 const OverviewPage: FC = () => {
   return (
-    <div className="flex gap-10 flex-col">
-      <PageContainer className="md:p-8 bg-brandGray h-screen">
+    <div className="bg-brandGray h-screen overflow-hidden ">
+      <PageContainer className="md:p-8 flex gap-10 flex-col ">
         <h3>Overview</h3>
-        <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
+        <div className="grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-1 gap-5">
           {analyticsData.map((item) => (
             <Card key={item.id}>
               <CardHeader className="flex flex-row gap-2 items-center">
@@ -41,7 +42,14 @@ const OverviewPage: FC = () => {
             </Card>
           ))}
         </div>
-        <ChartTransactionList title="Transactions" />
+        <div className="mt-12 flex lg:flex-row flex-col gap-6 w-full h-full">
+          <div className="lg:w-[60%] w-full">
+            <ChartTransactionList title="Sales" />
+          </div>
+          <div className="lg:w-[40%] w-full">
+            <BarChartComponent />
+          </div>
+        </div>
       </PageContainer>
     </div>
   );

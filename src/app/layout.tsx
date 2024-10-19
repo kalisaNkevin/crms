@@ -2,9 +2,6 @@
 import React from "react";
 import { Poppins } from "next/font/google";
 import "../components/styles/globals.css";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistor, store } from "@store/index";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 
@@ -36,24 +33,19 @@ export default function RootLayout({
         />
       </head>
       <body className={poppins.className}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <NextTopLoader
-              color="#f08f1e"
-              initialPosition={0.08}
-              crawlSpeed={200}
-              height={3}
-              crawl={true}
-              showSpinner={true}
-              easing="ease"
-              speed={200}
-              shadow="0 0 10px #f08f1e,0 0 5px #f08f1e"
-            />
-            <Toaster position="top-right" />
-            {children}
-
-          </PersistGate>
-        </Provider>
+        <NextTopLoader
+          color="#f08f1e"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #f08f1e,0 0 5px #f08f1e"
+        />
+        <Toaster position="top-right" />
+        {children}
       </body>
     </html>
   );

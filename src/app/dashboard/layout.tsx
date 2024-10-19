@@ -1,6 +1,6 @@
 import { Fragment, FC, ReactNode } from "react";
 import { Sidebar } from "@components/layout/sidebar";
-import MainNav from "@components/layout/index";
+import Header from "@/components/layout";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -9,11 +9,16 @@ interface DashboardLayoutProps {
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <Fragment>
-      <div className="flex h-screen">
+      <div className="lg:hidden">
         <Sidebar />
-        <div className="flex flex-col flex-1 md:ml-[16rem] pt-4">
-          <MainNav />
-          <main className="flex-1">{children}</main>
+      </div>
+      <div className="flex flex-col flex-1 overflow-y-hidden">
+        <Header />
+        <div className="flex flex-1">
+          <div className="hidden lg:block">
+            <Sidebar />
+          </div>
+          <main className="flex-1 mx-2 ml-0 md:ml-[15rem] overflow-y-hidden">{children}</main>
         </div>
       </div>
     </Fragment>
