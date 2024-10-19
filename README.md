@@ -4,6 +4,8 @@
 
 This project is a simple Next.js web application that fetches and visualizes website visit data and customer data from a CRM. It demonstrates the ability to work with data, APIs, and modern frontend development tools while ensuring performance and user experience.
 
+![Project Overview](public/images/overview.png)
+
 ## Features
 
 - **Landing Page**: Displays aggregated data for total visitors, bounce rate, and average session duration.
@@ -31,7 +33,7 @@ This project is a simple Next.js web application that fetches and visualizes web
    ```
 2. Add .env.local file in the file directory:
    ```bash
-   NEXT_PUBLIC_API= (your-mockaroo-api-keys)
+   Refer your self from the .ENV.EXAMPLE to use your own keys.
    ```
 
 ### Install dependencies
@@ -62,4 +64,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://www.mi
 
 ## Author
 
-This project was created by [Kalisa Ngabo Kevin]. You can reach out to me at [kalisangabokevin@gmail.com] or visit my GitHub profile at [https://github.com/kalisaNkevin](https://github.com/kalisaNkevin).
+This project was initiated by [Kalisa Ngabo Kevin](kalisangabokevin.me). You can reach out to me at [kalisangabokevin@gmail.com](kalisangabokevin@gmail.com) or visit my GitHub profile at [https://github.com/kalisaNkevin](https://github.com/kalisaNkevin).
