@@ -5,11 +5,11 @@ import axios, {
   AxiosError,
   AxiosHeaders,
   AxiosInstance,
-  type AxiosRequestConfig,
+  AxiosRequestConfig,
 } from "axios";
 
-export const BASE_API_URL = process.env.NEXT_PUBLIC_API;
-
+export const BASE_API_URL = process.env.NEXT_PUBLIC_API; // Your main API URL
+export const MOCKAROO_API_KEY = process.env.NEXT_PUBLIC_MOCKAROO_API_KEY;
 const BASE_URL = BASE_API_URL;
 
 axios.defaults.baseURL = BASE_URL;
@@ -18,27 +18,19 @@ interface CustomConfig extends AxiosRequestConfig {
   headers: AxiosHeaders;
 }
 
-function isTokenExpired(expireTime: number): boolean {
-  const currentTime = Math.floor(Date.now() / 1000);
-  return expireTime < currentTime;
-}
-
 const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
   const instance = axios.create({
-    baseURL: BASE_API_URL,
+    baseURL: BASE_API_URL, // Base URL for general requests
   });
+
   instance.interceptors.request.use(
     async (config: CustomConfig) => {
-      const accessToken = getCookies(authToken);
-      const parsedToken: Token = accessToken && JSON.parse(accessToken);
-
-      if (parsedToken) {
-        if (isTokenExpired(parsedToken.expireTime)) {
-          removeCookies(TOKEN_NAME);
-          window.location.href = "/auth/login";
-          return Promise.reject("Token expired");
-        }
-        config.headers.Authorization = `Bearer ${parsedToken.value}`;
+      config.headers["X-API-Key"] = MOCKAROO_API_KEY;
+      config.headers["Content-Type"] = "application/json";
+      config.headers["Accept"] = "application/json";
+      const token = getCookies(authToken) as Token | undefined;
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token.value}`;
       }
       return config;
     },
@@ -53,7 +45,7 @@ const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
     },
     (error: AxiosError) => {
       if (error.response && error.response.status === 401) {
-        removeCookies(TOKEN_NAME);
+        removeCookies(TOKEN_NAME); // Remove token if unauthorized
         console.log("AxiosError", error);
       }
       return Promise.reject(error);
@@ -63,4 +55,5 @@ const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
   return instance;
 };
 
+// Exporting the httpClient with the custom Axios instance
 export const httpClient = createCustomAxiosInstance(TOKEN_NAME);

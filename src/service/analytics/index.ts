@@ -1,21 +1,24 @@
 import { httpClient } from "@/config";
 
-export const getTotalInvestors = async () => {
-  const response = await httpClient.get(
-    "/admin/users/statistics/investors/count",
-  );
+export const getTotalPageViews = async () => {
+  const response = await httpClient.get("/pageview");
+
+  return response.data?.data;
+};
+export const getTotalUniqueVisitors = async () => {
+  const response = await httpClient.get("/uniquevisitors");
 
   return response.data?.data;
 };
 
-export const getTotalTransactions = async () => {
-  const response = await httpClient.get("/transaction/statistics/count");
+export const getTotalBounceRate = async () => {
+  const response = await httpClient.get("/bouncerate");
 
   return response.data?.data;
 };
 
-export const getTotalSyndicates = async () => {
-  const response = await httpClient.get("/syndicate/statistics/count");
+export const getTotalSessionDuration = async () => {
+  const response = await httpClient.get("/sessionduration");
 
   return response.data?.data;
 };

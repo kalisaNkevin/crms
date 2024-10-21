@@ -44,12 +44,12 @@ const chartConfig: ChartConfig = {
 
 const ChartTransactionList = ({ title }: { title: string }) => {
   return (
-    <div className="bg-white">
-      <PageContainer className="p-6">
+    <div className="bg-white w-full">
+      <PageContainer className="p-6 w-full">
         <h1 className="py-5 text-xl font-medium">{title}</h1>
-        <div className="bg-white">
-          <ChartContainer config={chartConfig} className="h-[400px]">
-            <ResponsiveContainer width={'100%'} height={400}>
+        <div className="bg-white w-full">
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
+            <ResponsiveContainer width="100%" height={400}>
               <AreaChart data={data}>
                 <defs>
                   <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

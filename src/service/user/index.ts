@@ -1,21 +1,15 @@
 import { httpClient } from "@/config";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../query-keys";
-
-import { useAppSelector } from "@/state/hooks";
-
-export const getUserProfile = async (userId: string) => {
-  return await httpClient.get(`/user/${userId}/profile`);
-};
-
-export const useFetchAdminProfile = () => {
-  const { profile } = useAppSelector((state) => state.user);
-
-  const result = useQuery({
-    queryFn: () => getUserProfile(profile?._id),
-    queryKey: [QUERY_KEYS.USER_PROFILE],
-    enabled: Boolean(profile?._id),
-  });
-
-  return { ...result, user: result.data?.data };
+export const getUsers = async (page: number, limit: number = 10) => {
+  try {
+    const response = await httpClient.get(`/users`, {
+      params: {
+        page,
+        limit,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
 };

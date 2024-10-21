@@ -1,4 +1,4 @@
-import { AUTH_TOKENS } from "@/lib/constants";
+import { TOKEN_NAME } from "@/lib/constants";
 import { removeCookies } from "@/lib/storage";
 import { TUser, TUserProfile, Token } from "@/service/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
@@ -12,8 +12,8 @@ const initialState = {
   token: {},
 } as User;
 
-export const userProfile = createSlice({
-  name: "userProfile",
+export const user = createSlice({
+  name: "user",
   initialState,
   reducers: {
     setUserProfile: (state, action: PayloadAction<Partial<TUser>>) => {
@@ -24,11 +24,11 @@ export const userProfile = createSlice({
     removeUser: (state) => {
       state.profile = null as unknown as TUserProfile;
       state.token = null as unknown as Token;
-      removeCookies(AUTH_TOKENS.IRON_KEY_ADMIN);
-      window.location.href = "/auth/login";
+      removeCookies(TOKEN_NAME);
+      window.location.href = "/";
     },
   },
 });
 
-export const { setUserProfile, removeUser } = userProfile.actions;
-export default userProfile.reducer;
+export const { setUserProfile, removeUser } = user.actions;
+export default user.reducer;

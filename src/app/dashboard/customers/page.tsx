@@ -1,7 +1,7 @@
 "use client";
 
 import { PageContainer } from "@/components/Container";
-import { FC } from "react";
+import { FC, useState } from "react";
 import TableList from "@/components/Table";
 import { TableCell } from "@/components/ui/table";
 import {
@@ -12,23 +12,28 @@ import { format } from "date-fns";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { COLUMNS } from "@/mocks/transactions";
 import { CustomerModal } from "@/components/Modals";
+import { useAllUsers } from "@/service/user/hooks";
 
 
 const renderTransactionRow = (row: ICustomerSchema) => (
   <>
     <TableCell>
-      {format(new Date(row.signupDate), "MMM dd, yyyy h:mm a")}
+      {format((row.signUpDate), "MMM dd, yyyy h:mm a")}
     </TableCell>
-    <TableCell>{row.name}</TableCell>
+    <TableCell>{`${row.first_name} ${row.last_name}`}</TableCell>
     <TableCell>{row.email}</TableCell>
+    <TableCell>{row.phone_number}</TableCell>
     <TableCell>
-      {format(new Date(row.lastActivity), "MMM dd, yyyy h:mm a")}
+      {format((row.lastActivity), "MMM dd, yyyy h:mm a")}
     </TableCell>
+    <TableCell>{row.residence}</TableCell>
   </>
 );
 
 const CustomerHomePage: FC = () => {
   const { isOpen, toggle } = useDisclose();
+  const [page, setPage] = useState(1);
+  const { data, isFetching } = useAllUsers(page, 10);
 
   const onSubmit = (values: { name: string; email: string; signupDate: string; lastActivity: string; }) => {
     // withdraw({ ...values })
@@ -44,18 +49,20 @@ const CustomerHomePage: FC = () => {
     <>
       <div className="h-screen">
         <PageContainer className="md:p-8 bg-brandGray h-screen">
-          {/* {isFetching && (
+          {isFetching && (
             <div className="flex items-center justify-center h-full">
               <ReloadIcon className="h-12 w-12 text-black animate-spin" />
             </div>
-          )} */}
+          )}
           <TableList<ICustomerSchema>
             title="Customer Details"
             label="Add Customer"
             onClick={toggle}
             columns={COLUMNS}
-            data={[]}
+            data={data || []}
             renderRow={renderTransactionRow}
+            totalItems={data?.length || 0}
+            itemsPerPage={10}
           />
         </PageContainer>
       </div>
@@ -63,7 +70,7 @@ const CustomerHomePage: FC = () => {
         open={isOpen}
         onDismiss={toggle}
         onSubmit={onSubmit}
-        isLoading={isWithdrawLoading}
+        isLoading={isFetching}
       /> */}
     </>
   );

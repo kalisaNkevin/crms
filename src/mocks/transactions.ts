@@ -1,1 +1,8 @@
-export const COLUMNS = ["Done at", "Amount", "Coin", "Address", "Status"];
+export const COLUMNS = [
+  "Signed",
+  "Names",
+  "Email",
+  "Mobile",
+  "Last Activity",
+  "Residence",
+];
