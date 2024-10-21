@@ -15,21 +15,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-
-const data = [
-  { month: "Jan", value: 70 },
-  { month: "Feb", value: 40 },
-  { month: "Mar", value: 10 },
-  { month: "Apr", value: 60 },
-  { month: "May", value: 30 },
-  { month: "Jun", value: 20 },
-  { month: "Jul", value: 10 },
-  { month: "Aug", value: 40 },
-  { month: "Sep", value: 80 },
-  { month: "Oct", value: 50 },
-  { month: "Nov", value: 15 },
-  { month: "Dec", value: 40 },
-];
+import { IAreaCharts } from "@/types/charts";
 
 const chartConfig: ChartConfig = {
   primary: {
@@ -42,7 +28,13 @@ const chartConfig: ChartConfig = {
   },
 };
 
-const ChartTransactionList = ({ title }: { title: string }) => {
+const ChartTransactionList = ({
+  title,
+  data,
+}: {
+  title: string;
+  data: IAreaCharts[];
+}) => {
   return (
     <div className="bg-white w-full">
       <PageContainer className="p-6 w-full">

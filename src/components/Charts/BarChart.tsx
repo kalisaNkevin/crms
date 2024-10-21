@@ -16,17 +16,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-const chartData = [
-  { name: "Alita Syndicate", desktop: 300, mobile: 80 },
-  { name: "Bingo Syndicate", desktop: 290, mobile: 200 },
-  { name: "Angel Syndicate", desktop: 250, mobile: 120 },
-  { name: "Cyndy Syndicate", desktop: 220, mobile: 190 },
-  { name: "Tie Syndicate", desktop: 200, mobile: 130 },
-  { name: "Generative Syndicate", desktop: 150, mobile: 140 },
-  { name: "Amazon Syndicate", desktop: 120, mobile: 140 },
-  { name: "Legal Syndicatee", desktop: 50, mobile: 140 },
-];
+import { useEffect, useState } from "react";
+import { useFetchCustomerData } from "@/service/barGraphs/hooks";
+import { IBarChart } from "@/types/charts";
 
 const chartConfig = {
   desktop: {
@@ -42,12 +34,18 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartComponent() {
+const BarChartComponent = ({
+  title,
+  chartData,
+}: {
+  title: string;
+  chartData: IBarChart[];
+}) => {
   return (
     <div className="bg-white rounded-xl w-full h-full">
       <Card className="w-full h-full !border-none">
         <CardHeader>
-          <h1 className="lg:text-lg text-base">Best Customers Sales</h1>
+          <h1 className="lg:text-lg text-base">{title}</h1>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
@@ -87,13 +85,13 @@ export function BarChartComponent() {
                   className="fill-[--color-label]"
                   fontSize={12}
                 />
-                {/* <LabelList
-                dataKey="desktop"
-                position="right"
-                offset={8}
-                className="fill-foreground"
-                fontSize={12}
-              /> */}
+                <LabelList
+                  dataKey="desktop"
+                  position="right"
+                  offset={8}
+                  className="fill-foreground"
+                  fontSize={12}
+                />
               </Bar>
             </BarChart>
           </ChartContainer>
@@ -101,4 +99,5 @@ export function BarChartComponent() {
       </Card>
     </div>
   );
-}
+};
+export default BarChartComponent;

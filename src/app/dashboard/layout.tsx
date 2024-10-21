@@ -18,7 +18,9 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
           <div className="hidden lg:block">
             <Sidebar />
           </div>
-          <main className="flex-1 mx-2 ml-0 md:ml-[15rem] overflow-y-hidden">{children}</main>
+          <main className="flex-1 mx-2 ml-0 md:ml-[15rem] overflow-y-hidden">
+            {children}
+          </main>
         </div>
       </div>
     </Fragment>

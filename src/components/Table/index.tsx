@@ -43,7 +43,10 @@ interface SearchInputProps {
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ searchQuery, handleSearchChange }) => {
+const SearchInput: React.FC<SearchInputProps> = ({
+  searchQuery,
+  handleSearchChange,
+}) => {
   return (
     <div className="flex justify-end mb-4 relative">
       <Input
@@ -69,7 +72,7 @@ interface TableListProps<T extends ICustomerSchema> {
   itemsPerPage: number;
 }
 
-const TableList = <T extends ICustomerSchema,>({
+const TableList = <T extends ICustomerSchema>({
   title,
   label,
   columns,
@@ -79,10 +82,10 @@ const TableList = <T extends ICustomerSchema,>({
   totalItems,
   itemsPerPage,
 }: TableListProps<T>) => {
-  const [currentPage, setCurrentPage] = useState(1);  // Track current page
-  const [searchQuery, setSearchQuery] = useState(""); // Track search query
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const totalPages = Math.ceil(totalItems / itemsPerPage);  // Calculate total pages
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
   const filteredData = data.filter((item) => {
     const customer = item as ICustomerSchema;
     const searchLower = searchQuery.toLowerCase();
@@ -93,33 +96,32 @@ const TableList = <T extends ICustomerSchema,>({
     );
   });
 
-  const filteredTotalItems = filteredData.length; // Total items after filtering
+  const filteredTotalItems = filteredData.length;
   const filteredTotalPages = Math.ceil(filteredTotalItems / itemsPerPage);
 
   const paginatedData = useMemo(() => {
     const startIdx = (currentPage - 1) * itemsPerPage;
     const endIdx = startIdx + itemsPerPage;
-    return filteredData.slice(startIdx, endIdx); // Slice data based on page
+    return filteredData.slice(startIdx, endIdx);
   }, [currentPage, filteredData, itemsPerPage]);
-
-
-  // Handle page change
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= filteredTotalPages) {
       setCurrentPage(page);
     }
   };
 
-  // Handle search query input
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
-    setCurrentPage(1); // Reset to the first page on search
+    setCurrentPage(1);
   };
 
   return (
     <div>
       <Header title={title} label={label} onClick={onClick} />
-      <SearchInput searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
+      <SearchInput
+        searchQuery={searchQuery}
+        handleSearchChange={handleSearchChange}
+      />
       <Table className="table-auto ">
         <TableHeader>
           <TableRow>
@@ -151,7 +153,11 @@ const TableList = <T extends ICustomerSchema,>({
               <PaginationLink
                 href="#"
                 onClick={() => handlePageChange(idx + 1)}
-                className={currentPage === idx + 1 ? "font-bold text-primary hover:text-primary" : ""}
+                className={
+                  currentPage === idx + 1
+                    ? "font-bold text-primary hover:text-primary"
+                    : ""
+                }
               >
                 {idx + 1}
               </PaginationLink>

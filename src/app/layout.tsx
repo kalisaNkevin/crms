@@ -12,7 +12,6 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "700"],
 });
 
-
 export default function RootLayout({
   children,
 }: Readonly<{

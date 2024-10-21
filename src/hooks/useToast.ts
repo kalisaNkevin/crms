@@ -13,7 +13,7 @@ const useDisplayToast = () => {
   const showToast = (
     message: string,
     type: "success" | "error" | "loading" = "success",
-    options: Partial<ToastOptions> = {}
+    options: Partial<ToastOptions> = {},
   ) => {
     if (toastIdRef.current) {
       toast.dismiss(toastIdRef.current);
@@ -31,7 +31,6 @@ const useDisplayToast = () => {
       ...options,
     };
 
-    // Set background color based on type of toast
     switch (type) {
       case "success":
         toastOptions.style = {
@@ -55,7 +54,6 @@ const useDisplayToast = () => {
         break;
     }
 
-    // Show the new toast and store its ID in the ref
     switch (type) {
       case "success":
         toastIdRef.current = toast.success(message, toastOptions);
@@ -74,7 +72,6 @@ const useDisplayToast = () => {
 
   const hideToast = () => {
     if (toastIdRef.current) {
-      // Dismiss the current toast and reset the ref
       toast.dismiss(toastIdRef.current);
       toastIdRef.current = null;
     }

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,32 +28,31 @@ import useDisplayToast from "@/hooks/useToast";
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
-  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
   const router = useRouter();
   const { showToast } = useDisplayToast();
   const form = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       rememberMe: true,
     },
   });
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    signInWithEmailAndPassword(data.email, data.password)
-      .then(async (res) => {
-        if (res) {
-          const token = await res.user.getIdToken();
-          const expiresIn: any = (await res.user.getIdTokenResult()).claims.exp;
-          setCookies(TOKEN_NAME, token, expiresIn);
-          sessionStorage.setItem('user', 'true');
-          showToast("🎉👏🎊 Login was successful! 🎉👏🎊", "success");
-          router.push("/dashboard/overview");
-        }
-        else {
-          showToast('Invalid Credentials 🤡', "error");
-        }
-      })
+    signInWithEmailAndPassword(data.email, data.password).then(async (res) => {
+      if (res) {
+        const token = await res.user.getIdToken();
+        const expiresIn: any = (await res.user.getIdTokenResult()).claims.exp;
+        setCookies(TOKEN_NAME, token, expiresIn);
+        sessionStorage.setItem("user", "true");
+        showToast("🎉👏🎊 Login was successful! 🎉👏🎊", "success");
+        router.push("/dashboard/overview");
+      } else {
+        showToast("Invalid Credentials 🤡", "error");
+      }
+    });
   };
 
   return (
@@ -127,11 +126,7 @@ const LoginPage = () => {
                     </FormItem>
                   )}
                 />
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={loading}
-                >
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Loading..." : "Login"}
                 </Button>
               </form>

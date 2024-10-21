@@ -8,8 +8,9 @@ import axios, {
   AxiosRequestConfig,
 } from "axios";
 
-export const BASE_API_URL = process.env.NEXT_PUBLIC_API; // Your main API URL
-export const MOCKAROO_API_KEY = process.env.NEXT_PUBLIC_MOCKAROO_API_KEY;
+import { BASE_API_URL } from "./env";
+import { MOCKAROO_API_KEY } from "./env";
+
 const BASE_URL = BASE_API_URL;
 
 axios.defaults.baseURL = BASE_URL;
@@ -20,7 +21,7 @@ interface CustomConfig extends AxiosRequestConfig {
 
 const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
   const instance = axios.create({
-    baseURL: BASE_API_URL, // Base URL for general requests
+    baseURL: BASE_API_URL,
   });
 
   instance.interceptors.request.use(
@@ -36,7 +37,7 @@ const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
     },
     (err) => {
       return Promise.reject(err);
-    }
+    },
   );
 
   instance.interceptors.response.use(
@@ -45,15 +46,14 @@ const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
     },
     (error: AxiosError) => {
       if (error.response && error.response.status === 401) {
-        removeCookies(TOKEN_NAME); // Remove token if unauthorized
+        removeCookies(TOKEN_NAME);
         console.log("AxiosError", error);
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   return instance;
 };
 
-// Exporting the httpClient with the custom Axios instance
 export const httpClient = createCustomAxiosInstance(TOKEN_NAME);
