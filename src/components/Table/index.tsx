@@ -23,12 +23,12 @@ import { Plus, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { ICustomerSchema } from "@/types";
 
-interface SyndicateHeaderProps {
+interface HeaderProps {
   title: string;
   label: string;
   onClick: () => void;
 }
-const Header = ({ title, label, onClick }: SyndicateHeaderProps) => (
+const Header = ({ title, label, onClick }: HeaderProps) => (
   <div className="flex mx-4 lg:mx-0 items-center justify-between pt-5 pb-10">
     <h1 className="text-lg">{title}</h1>
     <Button size="lg" onClick={onClick} className="flex items-center gap-2">

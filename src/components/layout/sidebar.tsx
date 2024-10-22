@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Drawer } from "@/components/ui/drawer";
-import { sideBarLinksSyndicate } from "@lib/links";
+import { sideBarLinksCustomer } from "@lib/links";
 import { usePathname, useRouter } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { Button } from "../ui/button";
@@ -18,7 +18,7 @@ export function Sidebar() {
             <Logo className="text-xl" />
           </div>
 
-          {sideBarLinksSyndicate.map((link) => (
+          {sideBarLinksCustomer.map((link) => (
             <div key={link.name} className="w-full grid grid-cols-1 gap-5">
               <span className="px-2 text-[#898989]">{link.name}</span>
               {link.subLinks.map((subLink) => {
@@ -30,11 +30,10 @@ export function Sidebar() {
                     onClick={() => {
                       router.push(subLink.key);
                     }}
-                    className={`flex text-white/90 gap-2 items-center justify-start p-2 cursor-pointer ${
-                      isActive
+                    className={`flex text-white/90 gap-2 items-center justify-start p-2 cursor-pointer ${isActive
                         ? "bg-primary !text-white h-[48px] px-2 w-[210px] rounded-md"
                         : " h-[48px] px-2 w-[210px] rounded-md"
-                    }`}
+                      }`}
                   >
                     <subLink.icon
                       className={`w-6 h-6 ${isActive ? "text-white" : " hover:text-white"}`}

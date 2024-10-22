@@ -3,7 +3,7 @@ import TransactionIcon from "../../public/icons/transactions";
 import WalletIcon from "../../public/icons/wallet";
 import { routes } from "./routes";
 
-export const sideBarLinksSyndicate = [
+export const sideBarLinksCustomer = [
   {
     key: 1,
     name: routes.overview.name,

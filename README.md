@@ -5,6 +5,8 @@
 This project is a simple Next.js web application that fetches and visualizes website visit data and customer data from a CRM. It demonstrates the ability to work with data, APIs, and modern frontend development tools while ensuring performance and user experience.
 
 ![Project Overview](public/images/overview.png)
+![Project Table](public/images/analytics.png)
+![Project Table](public/images/table.png)
 
 ## Features
 
@@ -23,6 +25,7 @@ This project is a simple Next.js web application that fetches and visualizes web
 
 - **Node.js**: Make sure you have Node.js installed on your local machine. You can download it from [nodejs.org](https://nodejs.org/).
 - **npm or yarn**: Ensure you have one of these package managers installed. npm comes with Node.js, and you can install yarn by following the instructions on [yarnpkg.com](https://yarnpkg.com/).
+- **mockaroo** : Make sure you have an account on Mockaroo you use your own api keys to fetch the fake data. you can create on from [here](https://mockaroo.com)
 
 ### Installation
 
@@ -35,6 +38,9 @@ This project is a simple Next.js web application that fetches and visualizes web
    ```bash
    Refer your self from the .ENV.EXAMPLE to use your own keys.
    ```
+3. Build the schema according to this reference here :
+
+![Project Schema](public/images/schema.png)
 
 ### Install dependencies
 

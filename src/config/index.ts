@@ -37,7 +37,7 @@ const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
     },
     (err) => {
       return Promise.reject(err);
-    },
+    }
   );
 
   instance.interceptors.response.use(
@@ -47,10 +47,9 @@ const createCustomAxiosInstance = (authToken: string): AxiosInstance => {
     (error: AxiosError) => {
       if (error.response && error.response.status === 401) {
         removeCookies(TOKEN_NAME);
-        console.log("AxiosError", error);
       }
       return Promise.reject(error);
-    },
+    }
   );
 
   return instance;

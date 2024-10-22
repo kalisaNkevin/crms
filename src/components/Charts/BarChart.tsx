@@ -16,8 +16,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useEffect, useState } from "react";
-import { useFetchCustomerData } from "@/service/barGraphs/hooks";
 import { IBarChart } from "@/types/charts";
 
 const chartConfig = {
@@ -45,10 +43,10 @@ const BarChartComponent = ({
     <div className="bg-white rounded-xl w-full h-full">
       <Card className="w-full h-full !border-none">
         <CardHeader>
-          <h1 className="lg:text-lg text-base">{title}</h1>
+          <h1 className="lg:text-lg text-base">Top Customers</h1>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={chartConfig}>
+          <ChartContainer config={chartConfig} className="h-[400px]">
             <BarChart
               accessibilityLayer
               data={chartData}
@@ -85,13 +83,13 @@ const BarChartComponent = ({
                   className="fill-[--color-label]"
                   fontSize={12}
                 />
-                <LabelList
-                  dataKey="desktop"
-                  position="right"
-                  offset={8}
-                  className="fill-foreground"
-                  fontSize={12}
-                />
+                {/* <LabelList
+                dataKey="desktop"
+                position="right"
+                offset={8}
+                className="fill-foreground"
+                fontSize={12}
+              /> */}
               </Bar>
             </BarChart>
           </ChartContainer>
@@ -99,5 +97,5 @@ const BarChartComponent = ({
       </Card>
     </div>
   );
-};
+}
 export default BarChartComponent;

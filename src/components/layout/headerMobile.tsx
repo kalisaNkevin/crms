@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu as MenuIcon } from "lucide-react";
 import ProfileSelector from "../ProfileSelector";
-import { sideBarLinksSyndicate } from "@/lib/links";
+import { sideBarLinksCustomer } from "@/lib/links";
 import { Logo } from "../Logo";
 import { Drawer } from "../ui/drawer";
 import { usePathname, useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ export default function MobileNav() {
                   <Logo className="text-xl" />
                 </div>
 
-                {sideBarLinksSyndicate.map((link) => (
+                {sideBarLinksCustomer.map((link) => (
                   <div key={link.key} className="w-full grid grid-cols-1 gap-5">
                     <span className="px-2 text-[#898989]">{link.name}</span>
                     {link.subLinks.map((subLink) => {
@@ -45,11 +45,10 @@ export default function MobileNav() {
                             router.push(subLink.key);
                             setOpen(false);
                           }}
-                          className={`flex text-black gap-2 items-center justify-start p-2 cursor-pointer ${
-                            isActive
+                          className={`flex text-black gap-2 items-center justify-start p-2 cursor-pointer ${isActive
                               ? "bg-primary text-white h-[48px] px-2 w-[210px] rounded-md"
                               : "hover:bg-primary hover:text-white h-[48px] px-2 w-[210px] rounded-md"
-                          }`}
+                            }`}
                         >
                           <subLink.icon className="w-6 h-6" />
                           {subLink.label}
